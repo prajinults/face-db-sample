@@ -10,7 +10,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 RUN --mount=type=cache,target=/root/.cache \
     pip install uwsgi
-COPY requirements/fr.txt requirements/fr.txt
+COPY requirements/fr_docker.txt requirements/fr.txt
 RUN --mount=type=cache,target=/root/.cache \
     pip install -r requirements/fr.txt
 COPY requirements/flasks.txt requirements/flasks.txt

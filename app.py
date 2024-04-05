@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import os
 import logging
 import sys
-from flask import json, Flask, jsonify
+from flask import json, Flask, jsonify, render_template
 from werkzeug.exceptions import HTTPException, InternalServerError
 from flask_cors import CORS
 from core.util import rate_limited
@@ -46,6 +46,7 @@ def threaded_function():
     print("exiting")
     sleep(1)
 
+
 @app.errorhandler(HTTPException)
 def handle_http_exception(e):
     """Return JSON instead of HTML for HTTP errors."""
@@ -71,6 +72,17 @@ def handle_exception(e):
     return handle_http_exception(InternalServerError())
 
 @app.route("/")
+@rate_limited()
+def face_recognition():
+    """ face_recognition page """
+    return render_template('index.html')
+
+@app.route("/register")
+@rate_limited()
+def face_register():
+    """ face-register page """
+    return render_template('register.html')
+@app.route("/update")
 @rate_limited()
 def home_page():
     """ root page """

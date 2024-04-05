@@ -1,0 +1,6 @@
+setuptools
+dlib
+face_recognition
+facedb
+opencv-python
+py-localtunnel

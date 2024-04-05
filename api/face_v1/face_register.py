@@ -90,6 +90,6 @@ def register():
 
     con.commit()
     con.close()
-    return jsonify({'status': 'success','user_name':user_name, 'message': 'user name updated'})
+    return jsonify({'status': 'success','user_name':user_name, 'message': 'user name registration successful'})
 
 
