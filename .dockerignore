@@ -1,0 +1,10 @@
+data
+myenv
+*.log
+.git
+*.md
+__pycache__
+.chroma
+venv
+open-ai-chat.postman_collection.json
+test.py

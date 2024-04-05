@@ -1,0 +1,15 @@
+version: '2'
+services:
+  flaskapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    tty: true
+    env_file:
+      - ./.env
+    volumes:
+      - ./secrets/:/python-docker/secrets/
+      - ./uploads:/python-docker/uploads/
+    restart: always

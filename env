@@ -1,0 +1,5 @@
+APP_SETTINGS=config.DevelopmentConfig
+FLASK_DEBUG=1
+OIDC_OPENID_REALM=ul-aiden
+# OIDC_CLIENT_SECRETS=/python-docker/secrets/client_secret.json
+OIDC_CLIENT_SECRETS=./secrets/client_secret.json

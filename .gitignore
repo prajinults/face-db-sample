@@ -1,0 +1,24 @@
+test.py
+secrets.txt
+chroma_logs.log
+.chroma
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local development configuration
+instance/
+uploads/
+
+# IDE files
+.vscode/
+.idea/
+
+# Dependencies
+venv/
+*.pyc
+/.env
+myvenv/
+/facedata

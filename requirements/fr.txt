@@ -1,0 +1,7 @@
+setuptools
+dlib
+face_recognition
+facedb
+opencv-python
+py-localtunnel
+git+https://github.com/ageitgey/face_recognition_models
