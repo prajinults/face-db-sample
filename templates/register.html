@@ -36,22 +36,31 @@
     <div id="app">
       <div id="main">
         <video class="camera" id="videoElement" autoplay></video>
-        <div>name: {{ user_name }}</div>
         <br />
-        <input type="text" v-model="user_name" title="name" placeholder="name" />
-        <button @click="captureImage">Register face</button>
+        <input
+          type="text"
+          v-model="user_name"
+          title="name"
+          placeholder="name"
+        />
+        <button id="button" @click="captureImage">Register face</button>
+        <br/>
+        <a href="/">Recognize</a>
+        
       </div>
       <div id="results" class="results"></div>
     </div>
 
     <script>
-      const { createApp, ref ,defineModel} = Vue;
+      const { createApp, ref, defineModel } = Vue;
 
       createApp({
         setup() {
           const user_name = ref("");
-          console.log(user_name)
+          console.log(user_name);
           const captureImage = async () => {
+            document.getElementById("button").disabled = true;
+            document.getElementById("button").innerText = "Processing...";
             const videoElement = document.getElementById("videoElement");
             const canvas = document.createElement("canvas");
             canvas.width = videoElement.videoWidth;
@@ -79,12 +88,14 @@
             ctx.font = "38px serif";
             ctx.fillStyle = "green";
             ctx.fillText(new Date().toLocaleString(), 10, 150);
+            document.getElementById("button").disabled = false;
+            document.getElementById("button").innerText = "Register face";
           };
 
           const sendToRecognitionAPI = async (file) => {
             const formData = new FormData();
             formData.append("file", file);
-            console.log(user_name)
+            console.log(user_name);
             formData.append("user_name", user_name.value);
             try {
               const response = await fetch("/api/v1/face/register", {
@@ -119,7 +130,18 @@
         },
         mounted() {
           navigator.mediaDevices
-            .getUserMedia({ video: true })
+            .getUserMedia({
+              video: {
+                width: {
+                  min: 200,
+                  max: 800,
+                },
+                height: {
+                  min: 200,
+                  max: 800,
+                },
+              },
+            })
             .then((stream) => {
               const videoElement = document.getElementById("videoElement");
               videoElement.srcObject = stream;

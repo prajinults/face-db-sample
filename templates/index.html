@@ -37,7 +37,7 @@
       <div id="main">
         <video class="camera" id="videoElement" autoplay></video>
         <br />
-        <button @click="captureImage">recognize face</button>
+        <button id="button" @click="captureImage">recognize face</button>
         <a href="/register">Register face</a>
       </div>
       <div id="results" class="results"></div>
@@ -49,6 +49,8 @@
       createApp({
         setup() {
           const captureImage = async () => {
+            document.getElementById("button").disabled = true;
+            document.getElementById("button").innerText = "Processing...";
             const videoElement = document.getElementById("videoElement");
             const canvas = document.createElement("canvas");
             canvas.width = videoElement.videoWidth;
@@ -76,6 +78,8 @@
             ctx.font = "38px serif";
             ctx.fillStyle = "green";
             ctx.fillText(new Date().toLocaleString(), 10, 150);
+            document.getElementById("button").disabled = false;
+            document.getElementById("button").innerText = "Recognize face";
           };
 
           const sendToRecognitionAPI = async (file) => {
@@ -113,7 +117,18 @@
         },
         mounted() {
           navigator.mediaDevices
-            .getUserMedia({ video: true })
+            .getUserMedia({
+              video: {
+                width: {
+                  min: 200,
+                  max: 800,
+                },
+                height: {
+                  min: 200,
+                  max: 800,
+                },
+              },
+            })
             .then((stream) => {
               const videoElement = document.getElementById("videoElement");
               videoElement.srcObject = stream;
