@@ -11,7 +11,7 @@ from py_localtunnel.lt import run_localtunnel
 from time import sleep
 
 from api.api_v1 import api_v1_bp
-
+import urllib
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
@@ -102,5 +102,8 @@ def api_health():
     """ health endpoint """
     return jsonify({"health": "up"})
 
-# thread = Thread(target = threaded_function)
-# thread.start()
+if __name__ == '__main__':
+    print("Password/Enpoint IP for localtunnel is:",urllib.request.urlopen('https://ipv4.icanhazip.com').read().decode('utf8').strip("\n"))
+    thread = Thread(target = threaded_function)
+    thread.start()
+    app.run(host='0.0.0.0', port=5000)
